@@ -6,15 +6,23 @@
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
 }
+body {
+    
+}
 .navbar {
-    height: 60px;
-    width: 100vw;
+    height: 80px;
+    width: 100%;
     background: linear-gradient(to right bottom,
     rgba(0, 0, 0, 0.7),
     rgba(0, 0, 0, 0.2));
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: fixed;
+    z-index: 1;
+}
+.invisible {
+    height: 80px;
 }
 
 #title {
@@ -22,42 +30,57 @@
     font-family: 'Anton', sans-serif;
     margin-left: 50px;
     font-size: 1.5em;
+    margin-right: 20px;
 }
 #search {
-    margin-right: 50px;
     padding: 5px;
     border-radius: 5px;
 }
 
 #navbar-list {
+    width: 100%;
     display: flex;
+    flex-wrap: wrap;
     color: #fff;
     list-style: none;
+    justify-content: space-evenly;
+    
 }
 #navbar-list a {
-    margin-left: 20px;
+    margin-right: 10px;
     text-decoration: none;
     color: #fff;
-    font-size: 0.8em ;
-}
-#left-nav {
-    width: 40vw;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    font-size: 0.9em ;
+    opacity: 0.9;
 }
 
+#left-nav {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+#input {
+    display: flex;
+    margin-right: 40px;
+    justify-content: flex-end;
+    width: 20%;
+}
+.navbar input {
+    width: 150px;
+}
 #root {
-    width: 100vw;
+    width: 100%;
     min-height: 100vh;
     background-color: #141414;
+    
 }
 .cards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    margin-top: 40px;
-    width: 100vw;
+    margin-top: 20px;
+    width: 100%;
+    justify-content: space-around;
 }
 .card-film {
     width: 185px;
@@ -68,17 +91,24 @@
     justify-content: center;
     border-radius: 10px;
 }
-
+.cards #poster {
+    width: 100%;
+    border-radius: 5px;
+}
 
 #info-film {
     display: flex;
     flex-direction: column;
     justify-content: center;
     line-height: 25px;
-}
+} 
 #info-film span {
     font-size: 12px;
 }
+.voto {
+    position: relative;
+}
 #info-film img {
-    width: 50px;
+    border-radius: 50%;
+    width: 30px;
 }
