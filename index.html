@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallflix</title>
+    <!-- GOOGLE FONT -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+    <!-- icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <title>vue-dischi</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="./assets/css/master.css">
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="./assets/img/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    
+    <div id="root">
+        <nav class="navbar">
+            <div id="left-nav">
+                <h1 id="title">WALLFLIX</h1>
+                <ul id="navbar-list">
+                    <li><a href="">Home</a></li>
+                    <li><a href="">Serie Tv</a></li>
+                    <li><a href="">Film</a></li>
+                    <li><a href="">Nuovi e Popolari</a></li>
+                    <li><a href="">La mia lista</a></li>
+                </ul>
+            </div>
+            <input v-model="search" id="search" type="text" @keyup.enter="searchFilm()">
+        </nav>
+
+        <main>
+            <div class="cards" >
+                <div  class="card-film" v-for="film in films">
+                    <img :src="'https://image.tmdb.org/t/p/w185/'+film.poster_path+ '' " alt="">
+                    <div id="info-film">
+                        <span class="title">Titolo: {{ film.title }}</span>    
+                        <span class="titleOr">Originale :{{ film.original_title }}</span>
+                        <div class="voto">Voto: {{ film.vote_average }}</div>
+                        <img v-if= "film.original_language == 'en' " src="https://www.countryflags.io/us/flat/64.png" alt="">
+                        <img v-else :src="`https://www.countryflags.io/${film.original_language}/flat/64.png`" alt="flag">
+                        
+                    </div>
+                        
+                        
+                    </div>
+                   
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+
+
+
+       <!-- SCRIPT -->
+    
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" charset="utf-8"></script>
+       <script src='https://cdn.jsdelivr.net/npm/vue'></script>
+       <script src="./assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+.navbar {
+    height: 60px;
+    width: 100vw;
+    background: linear-gradient(to right bottom,
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.2));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#title {
+    color: #E50914;
+    font-family: 'Anton', sans-serif;
+    margin-left: 50px;
+    font-size: 1.5em;
+}
+#search {
+    margin-right: 50px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#navbar-list {
+    display: flex;
+    color: #fff;
+    list-style: none;
+}
+#navbar-list a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 0.8em ;
+}
+#left-nav {
+    width: 40vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#root {
+    width: 100vw;
+    min-height: 100vh;
+    background-color: #141414;
+}
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 40px;
+    width: 100vw;
+}
+.card-film {
+    width: 185px;
+    color: #fff;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+
+#info-film {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    line-height: 25px;
+}
+#info-film span {
+    font-size: 12px;
+}
+#info-film img {
+    width: 50px;
+}
