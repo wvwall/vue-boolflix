@@ -32,10 +32,10 @@
                 </ul>
             </div>
             <div id="input">
-               <!--  <select v-model="select" name="" id="" >
+                <select v-model="select" name="" id="" >
                     <option value="">All</option>
                     <option v-for="genre in genresFilm" :value= "genre.id"  >{{ genre.name }}</option>
-                </select> -->
+                </select>
                 <input placeholder="Cerca Film o Serie" v-model="search" id="search" type="text" @keyup.enter="searchFilm()">
             </div>
         </nav>
@@ -45,7 +45,7 @@
         <!-- CARDS-MAIN -->
         <main>
             <div class="card-container" >
-                <div class="card" id="film" v-for="film in films" v-if = "select == film.genre_ids || select == '' " >
+                <div class="card" id="film" v-for="film in films" v-if = "film.genre_ids.includes(select) || select == '' " >
                     <div ><h1 class="divisore1">FILM</h1></div>
                     <!-- front -->
                     <div class="front" >
