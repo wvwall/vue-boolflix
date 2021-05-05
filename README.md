@@ -1,4 +1,5 @@
 vue-boolflix
+![Screenshot](Wallflix.png)
 Milestone 1:
 Creare un l ayout b ase con u na s earchbar (una i nput e u n b utton) i n c ui possiamo
 scrivere completamente o p arzialmente il n ome di u n f ilm. P ossiamo, cliccando i l
