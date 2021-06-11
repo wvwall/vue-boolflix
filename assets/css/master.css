@@ -32,7 +32,7 @@ html {
 
 #title,
 #title2 {
-    color: #3FB27F;
+    color: rgb(247, 6, 6);
     font-family: 'Zen Dots', cursive;
     margin: 0 50px;
     font-size: 1.9em;
@@ -79,7 +79,7 @@ html {
     background: linear-gradient(to right bottom,
     rgba(0, 0, 0, 0.7),
     rgba(0, 0, 0, 0.2));
-    color: #3FB27F;
+    color: rgb(247, 6, 6);;
     width: 70px;
     font-size: 0.6em;
     font-weight: 600;
@@ -309,8 +309,9 @@ html::-webkit-scrollbar-thumb {
 .fa-film,
 .fa-video {
     margin-right: 5px;
-    color:#3FB27F;
+    color:rgb(247, 6, 6);;
     font-size: 1em;
+    font-weight: 700;
 }
 #select {
     background: linear-gradient(to right bottom,

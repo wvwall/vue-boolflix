@@ -3,7 +3,7 @@ Vue.config.devtools = true;
 var app = new Vue ({
     el: '#root',
     data: {
-     search: "",
+     search: "marvel",
      films: [] ,
      series: [] ,
      genresFilm: [],
@@ -31,6 +31,16 @@ var app = new Vue ({
         }
     },
     mounted() {
+      axios.get(`https://api.themoviedb.org/3/search/movie?api_key=1fca7b48e709a528e543e95bb52c20bd&language=it-IT&query=${this.search}`)
+      .then((response) => {
+        this.films = response.data.results;
+      });
+
+      /* chiamata serie */
+      axios.get(`https://api.themoviedb.org/3/search/tv?api_key=1fca7b48e709a528e543e95bb52c20bd&language=it-IT&query=${this.search}`)
+      .then((response) => {
+        this.series = response.data.results;
+      });
 
       /* chiamata generi */
       axios.get("https://api.themoviedb.org/3/genre/movie/list?api_key=1fca7b48e709a528e543e95bb52c20bd")
