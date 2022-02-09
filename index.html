@@ -1,120 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wallflix</title>
     <!-- GOOGLE FONT -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet"> 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
     <!-- icon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+    />
     <title>vue-dischi</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="./assets/css/master.css">
+    <link rel="stylesheet" href="./assets/css/master.css" />
     <!-- FAVICON -->
-    <link rel="shortcut icon" href="./assets/img/favicon.png" type="image/x-icon">
-</head>
-<body>
-    
-    <div id="root" >
-        <!-- NAVBAR -->
-        <nav class="navbar" >
-            <div id="left-nav">
-                <h1 id="title">WALLFLIX</h1>
-                <h1 id="title2">W</h1>
-                <ul id="navbar-list">
-                    <li id="home"><a href="">Home</a></li>
-                    <li><a href="#film">Film</a></li>
-                    <li><a href="#serie">Serie Tv</a></li>
-                </ul>
-            </div>
-    
-            <div id="input">
-                <input placeholder="Cerca" v-model="search" id="search" type="text" @keyup.enter="searchFilm()">
-                <select v-model="select" name="" id="select" >
-                    <option value="">All</option>
-                    <option v-for="genre in genresFilm" :value= "genre.id"  >{{ genre.name }}</option>
-                </select>
-            </div>
-        </nav>
+    <link
+      rel="shortcut icon"
+      href="./assets/img/favicon.png"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <div id="root">
+      <!-- NAVBAR -->
+      <nav class="navbar">
+        <div id="left-nav">
+          <h1 id="title">WALLFLIX</h1>
+          <h1 id="title2">W</h1>
+          <ul id="navbar-list">
+            <li id="home"><a href="">Home</a></li>
+            <li><a href="#film">Film</a></li>
+            <li><a href="#serie">Serie Tv</a></li>
+          </ul>
+        </div>
 
-        <div class="invisible"></div>
-        
-        <!-- CARDS-MAIN -->
-        <main>
-            <div class="card-container" >
-                <div class="card" id="film" v-for="film in films" v-if = "film.genre_ids.includes(select) || select == '' " >
-                    <div ><h1 class="divisore1"><i class="fas fa-film"></i>Film</h1></div>
-                    <!-- front -->
-                    <div class="front" >
-                        <!-- <span id="notFound">poster non disponibile</span> -->
-                        <img id="poster" v-if = "film.poster_path != null" :src="'https://image.tmdb.org/t/p/w185/'+film.poster_path+ '' " alt="">
-                        <div id="notFound" v-else>
-                            <span style="margin-top: 40px; margin-bottom: 10px; display: block;">Elio il poster?</span>
-                            <img src="./assets/img/elio.jpg" alt="">
-                        </div> 
-                    </div>
+        <div id="input">
+          <input
+            placeholder="Cerca"
+            v-model="search"
+            id="search"
+            type="text"
+            @keyup.enter="searchFilm()"
+          />
+          <select v-model="select" name="" id="select">
+            <option value="">All</option>
+            <option v-for="genre in genresFilm" :value="genre.id">
+              {{ genre.name }}
+            </option>
+          </select>
+        </div>
+      </nav>
 
-                    <!-- back -->
-                    <div class="back" >
-                        <div id="info-film" >
-                            <span class="title">Titolo : {{ film.title }}</span>    
-                            <span class="titleOr">Originale : {{ film.original_title }}</span>
-                            <span class="voto">Voto : {{ film.vote_average }} / 10</span>
-                            <div class="stars">
-                                <p><i v-for="i in starsVote(film.vote_average)" class="fas fa-star yellow"></i></p>
-                                <p><i v-for="i in (5 - starsVote(film.vote_average))" class="far fa-star yellow"></i></p>
-                            </div>
-                            <img v-if= "film.original_language == 'en' " src="https://www.countryflags.io/us/flat/64.png" alt="">
-                            <img v-else  :src="`https://www.countryflags.io/${film.original_language}/flat/64.png`" alt="flag">
-                            <span class="trama">{{ film.overview }}</span>
-                        </div> 
-                    </div>
+      <div class="invisible"></div>
+
+      <!-- CARDS-MAIN -->
+      <main>
+        <div class="card-container">
+          <div
+            class="card"
+            id="film"
+            v-for="film in films"
+            v-if="film.genre_ids.includes(select) || select == '' "
+          >
+            <div>
+              <h1 class="divisore1"><i class="fas fa-film"></i>Film</h1>
+            </div>
+            <!-- front -->
+            <div class="front">
+              <!-- <span id="notFound">poster non disponibile</span> -->
+              <img
+                id="poster"
+                v-if="film.poster_path != null"
+                :src="'https://image.tmdb.org/t/p/w185/'+film.poster_path+ '' "
+                alt=""
+              />
+              <div id="notFound" v-else>
+                <span
+                  style="margin-top: 40px; margin-bottom: 10px; display: block"
+                  >Elio il poster?</span
+                >
+                <img src="./assets/img/elio.jpg" alt="" />
+              </div>
+            </div>
+
+            <!-- back -->
+            <div class="back">
+              <div id="info-film">
+                <span class="title">Titolo : {{ film.title }}</span>
+                <span class="titleOr"
+                  >Originale : {{ film.original_title }}</span
+                >
+                <span class="voto">Voto : {{ film.vote_average }} / 10</span>
+                <div class="stars">
+                  <p>
+                    <i
+                      v-for="i in starsVote(film.vote_average)"
+                      class="fas fa-star yellow"
+                    ></i>
+                  </p>
+                  <p>
+                    <i
+                      v-for="i in (5 - starsVote(film.vote_average))"
+                      class="far fa-star yellow"
+                    ></i>
+                  </p>
                 </div>
-                
-                <div class="card" id="serie" v-for="serie in series" >
-                    <div ><h1 class="divisore2"><i class="fas fa-video"></i>Serie</h1></div>
-                    <!-- front -->
-                    <div class="front" >
-                        <!-- <span id="notFound">poster non disponibile</span> -->
-                        <img id="poster" v-if = "serie.poster_path != null" :src="'https://image.tmdb.org/t/p/w185/'+serie.poster_path+ '' " alt="">
-                        <div id="notFound" v-else>
-                            <span style="margin-top: 50px; display: block;">E il poster?!</span>
-                            <img src="./assets/img/elio.jpg" alt="">
-                        </div>
-                    </div>
-
-                    <!-- back -->
-                    <div class="back" >
-                        <div id="info-film" >
-                            <span class="title">Titolo: {{ serie.name }}</span>    
-                            <span class="titleOr">Originale: {{ serie.original_name }}</span>
-                            <span class="voto">Voto: {{ serie.vote_average }} / 10</span>
-                            <div class="stars">
-                                <p><i v-for="i in starsVote(serie.vote_average)" class="fas fa-star yellow"></i></p>
-                                <p><i v-for="i in (5 - starsVote(serie.vote_average))" class="far fa-star yellow"></i></p>
-                            </div>
-                            <img v-if= "serie.original_language == 'en' " src="https://www.countryflags.io/us/flat/64.png" alt="">
-                            <img v-else :src="`https://www.countryflags.io/${serie.original_language}/flat/64.png`" alt="flag">
-                            <span class="trama">{{ serie.overview }}</span>
-                        </div> 
-                    </div>
-                </div>
+                <img
+                  v-if="film.original_language == 'en' "
+                  src="https://www.countryflags.io/us/flat/64.png"
+                  alt=""
+                />
+                <img
+                  v-else
+                  :src="`https://www.countryflags.io/${film.original_language}/flat/64.png`"
+                  alt="flag"
+                />
+                <span class="trama">{{ film.overview }}</span>
+              </div>
             </div>
-        </main>
+          </div>
+
+          <div class="card" id="serie" v-for="serie in series">
+            <div>
+              <h1 class="divisore2"><i class="fas fa-video"></i>Serie</h1>
+            </div>
+            <!-- front -->
+            <div class="front">
+              <!-- <span id="notFound">poster non disponibile</span> -->
+              <img
+                id="poster"
+                v-if="serie.poster_path != null"
+                :src="'https://image.tmdb.org/t/p/w185/'+serie.poster_path+ '' "
+                alt=""
+              />
+              <div id="notFound" v-else>
+                <span style="margin-top: 50px; display: block"
+                  >E il poster?!</span
+                >
+                <img src="./assets/img/elio.jpg" alt="" />
+              </div>
+            </div>
+
+            <!-- back -->
+            <div class="back">
+              <div id="info-film">
+                <span class="title">Titolo: {{ serie.name }}</span>
+                <span class="titleOr"
+                  >Originale: {{ serie.original_name }}</span
+                >
+                <span class="voto">Voto: {{ serie.vote_average }} / 10</span>
+                <div class="stars">
+                  <p>
+                    <i
+                      v-for="i in starsVote(serie.vote_average)"
+                      class="fas fa-star yellow"
+                    ></i>
+                  </p>
+                  <p>
+                    <i
+                      v-for="i in (5 - starsVote(serie.vote_average))"
+                      class="far fa-star yellow"
+                    ></i>
+                  </p>
+                </div>
+                <img
+                  v-if="serie.original_language == 'en' "
+                  src="https://www.countryflags.io/us/flat/64.png"
+                  alt=""
+                />
+                <img
+                  v-else
+                  :src="`https://www.countryflags.io/${serie.original_language}/flat/64.png`"
+                  alt="flag"
+                />
+                <span class="trama">{{ serie.overview }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
 
-
-
-
-
-       <!-- SCRIPT -->
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" charset="utf-8"></script>
-       <script src='https://cdn.jsdelivr.net/npm/vue'></script>
-       <script src="./assets/js/main.js"></script>
-</body>
+    <!-- SCRIPT -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"
+      charset="utf-8"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="./assets/js/main.js"></script>
+  </body>
 </html>
